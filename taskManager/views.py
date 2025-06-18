@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.http import HttpResponse
 
 def index(request):
-    return render(request, "index.html")
+    return render(request, "taskManager/index.html")
 
 def register(request):
     if request.method == 'POST':
@@ -15,4 +15,4 @@ def register(request):
             return redirect('login')
     else:
         form = UserCreationForm()
-    return render(request, 'register.html', {'form': form})
+    return render(request, 'taskManager/register.html', {'form': form})
