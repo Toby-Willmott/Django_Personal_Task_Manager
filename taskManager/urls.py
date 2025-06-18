@@ -6,7 +6,7 @@ from . import views as task_views
 urlpatterns = [
         path('', task_views.index, name='index'),
         path('register/', task_views.register, name='register'),
-        path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+        path('login/', auth_views.LoginView.as_view(template_name='taskManager/login.html'), name='login'),
         path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
 ]
