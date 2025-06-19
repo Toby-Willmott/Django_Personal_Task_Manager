@@ -8,5 +8,6 @@ urlpatterns = [
         path('register/', task_views.register, name='register'),
         path('login/', auth_views.LoginView.as_view(template_name='taskManager/login.html'), name='login'),
         path('logout/', auth_views.LogoutView.as_view(), name='logout'),
-
+        path('update-tasks/', task_views.update_tasks, name="update_tasks"),
+        path('add-task/', task_views.add_task, name='add_task'),
 ]

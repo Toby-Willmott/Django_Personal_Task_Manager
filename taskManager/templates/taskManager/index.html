@@ -1,3 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Your Tasks</title>
+</head>
+<body>
 <h1>Welcome, {{ user.username }}!</h1>
-<p>You are now logged in.</p>
-<a href="{% url 'login' %}">Logout</a>
+<h2>Your Tasks</h2>
+
+{% if user_tasks %}
+<ul>
+    <form method="post" action="{% url 'update_tasks' %}">
+        {% csrf_token %}
+        <ul>
+            {% for task in user_tasks %}
+            <li>
+                <label>
+                    <input type="checkbox" name="completed_tasks" value="{{ task.id }}" {% if task.completed %}checked{% endif %}>
+                    <strong>{{ task.title }}</strong> — {{ task.description }}
+                </label>
+            </li>
+            {% endfor %}
+        </ul>
+        <button type="submit">Save Changes</button>
+    </form>
+</ul>
+{% else %}
+<p>You have no tasks yet.</p>
+{% endif %}
+<h3>Add a New Task</h3>
+<form method="post" action="{% url 'add_task' %}">
+    {% csrf_token %}
+    <label for="title">Title:</label><br>
+    <input type="text" name="title" required><br>
+
+    <label for="description">Description:</label><br>
+    <textarea name="description"></textarea><br>
+
+    <button type="submit">Add Task</button>
+</form>
+<p><a href="{% url 'login' %}">Logout</a></p>
+</body>
+</html>
